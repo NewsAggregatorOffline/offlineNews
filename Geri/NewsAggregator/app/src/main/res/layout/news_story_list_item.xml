@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:minHeight="48dp"
+    android:padding="8dp" >
+
+    <!--android:layout_height="127dp"-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:minHeight="200dp"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.18"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="83dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.71">
+
+            <!--<ImageView-->
+            <!--android:id="@+id/imageView2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:srcCompat="@android:drawable/btn_dialog"-->
+            <!--android:layout_marginTop="49dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
+
+            <Switch
+                android:id="@+id/saveSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="11dp"
+                android:text=""
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="14dp"
+                android:layout_marginEnd="14dp" />
+
+            <TextView
+                android:id="@+id/storyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/saveSwitch"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingLeft="17sp"
+                android:text="Story" />
+
+            <TextView
+                android:id="@+id/saveTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/storyTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingLeft="17sp"
+                android:text="Save" />
+
+            <!--<ImageView-->
+                <!--android:id="@+id/imageView5"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@android:drawable/ic_menu_gallery"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_centerHorizontal="true" />-->
+
+            <ImageView
+                android:id="@+id/urlImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/news_1200x800"
+                android:layout_above="@+id/textView13"
+                android:paddingRight="7sp"
+                android:layout_alignParentStart="true" />
+            <!--<ImageView-->
+                <!--android:id="@+id/imageView5"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@android:drawable/ic_menu_gallery"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_centerHorizontal="true" />-->
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="196dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:layout_weight="0.17">
+
+            <!--android:id="@+id/textView3"-->
+
+            <TextView
+                android:id="@+id/headlineText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sample_headline"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_weight="0.25" />
+
+            <!--android:id="@+id/textView9"-->
+
+            <TextView
+                android:id="@+id/bodyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sample_body"
+                android:layout_gravity="fill"
+                android:layout_weight="0.69" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--<ImageView-->
+        <!--android:id="@+id/dividerImage"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.04"-->
+        <!--android:src="@colors/colorPrimaryDark" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/imageView3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="11dp"-->
+    <!--app:srcCompat="@android:color/darker_gray" />-->
+</LinearLayout>
