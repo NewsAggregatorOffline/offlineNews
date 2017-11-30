@@ -13,16 +13,12 @@ import android.view.ViewGroup;
  */
 
 public class MainFeedFragment extends ListFragment {
-    String[] articleSamples = new String[] {
-            new MainActivity.ArticleSample("1").toString(), new MainActivity.ArticleSample("2").toString()};
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//
-//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                    inflater.getContext(), android.R.layout.simple_list_item_1,
-//                    articleSamples);
+
         final NewsViewAdapter la = new NewsViewAdapter(getContext());
 
         setListAdapter(la);
