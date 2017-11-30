@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">UIListViewCustomAdapter</string>
+
+    <string-array name="colors">
+        <item>red</item>
+        <item>orange</item>
+        <item>yellow</item>
+        <!--<item>green</item>-->
+        <!--<item>blue</item>-->
+        <!--<item>indigo</item>-->
+        <!--<item>violet</item>-->
+        <!--<item>aqua</item>-->
+        <!--<item>black</item>-->
+        <!--<item>fuchsia</item>-->
+        <!--<item>gray</item>-->
+        <!--<item>grey</item>-->
+        <!--<item>lime</item>-->
+        <!--<item>maroon</item>-->
+        <!--<item>navy</item>-->
+        <!--<item>olive</item>-->
+        <!--<item>purple</item>-->
+        <!--<item>silver</item>-->
+        <!--<item>teal</item>-->
+        <!--<item>white</item>-->
+    </string-array>
+
+    <string name="headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+
+    <string name="sample_headline">Whitefish Halts Puerto Rico Work Early Over Unpaid $83 Million</string>
+
+    <string name="story_body">Fusce rutrum enim in tincidunt mollis. Donec neque urna, semper vitae pulvinar non, efficitur vulputate velit. Phasellus ornare malesuada odio, vehicula pharetra mauris. Praesent finibus erat vel libero ultrices fringilla. </string>
+
+    <string name="sample_body">The Trump campaign has stopped paying legal bills for Donald Trump Jr. and is setting up a legal defense fund to cover the costs for him and other campaign staffers related to investigations into Russian election meddling, said a person familiar with the matter.</string>
+</resources>
