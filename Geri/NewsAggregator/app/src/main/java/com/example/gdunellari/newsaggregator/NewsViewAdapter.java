@@ -24,14 +24,9 @@ class NewsViewAdapter extends BaseAdapter {
 
 
 
-
-    //    public NewsViewAdapter(Context context, int resource, String[] objects) {
     public NewsViewAdapter(Context context) {
-//        super(context);
-
         mContext = context;
 
-//        super(context, resource, objects);
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -44,7 +39,6 @@ class NewsViewAdapter extends BaseAdapter {
         if (null == dataView) {
 
             // Not recycled. Create the View
-//            dataView = mLayoutInflater.inflate(R.layout.list_item, parent, false);
             dataView = mLayoutInflater.inflate(R.layout.news_story_list_item, parent, false);
             StoryLi storyLi = mItems.get(position);
 
@@ -52,68 +46,40 @@ class NewsViewAdapter extends BaseAdapter {
             // Cache View information in ViewHolder Object
             final ViewHolder viewHolder = new ViewHolder();
 
-//            View itemView = super.getView(position, convertView, parent);
             final ImageView imageView = (ImageView) dataView.findViewById(R.id.urlImage);
-//            imageView.setImageResource(R.drawable.news_1200x759);
 
             final TextView textView1 = (TextView) dataView.findViewById(R.id.headlineText);
             final TextView textView2 = (TextView) dataView.findViewById(R.id.bodyText);
 
-//            final Bitmap imageBitmap = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.news_1200x759);
 
             imageView.setImageBitmap(storyLi.getUrlImage());
             textView1.setText(storyLi.getTitle());
             textView2.setText(storyLi.getDescription());
 
-
             viewHolder.switchView = dataView.findViewById(R.id.saveSwitch);
-            Log.i(TAG, "about to add onCecked" );
+
+
             viewHolder.switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton cb, boolean on) {
-                    Log.i(TAG, "clicked" );
-//                    Log.i(TAG, "value before:" + viewHolder.switchView.getShowText());
-                    Log.i(TAG, "value before:" + viewHolder.saved);
-
+//                    Log.i(TAG, "inside click liskener" );
 
                     if(on){
-//                        viewHolder.switchView.setChecked(true);
                         Log.i(TAG, "Switch is on!!" );
                         viewHolder.saved = true;
-//                        imageView.setImageResource(R.drawable.news_1200x759);
-//                        imageView.setImageBitmap(imageBitmap);
-//                        textView1.setText("This is an example Headline");
-//                        textView2.setText("This is an example Body text...");
-
                         Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
-
-
-
 
                     }else{
                         Log.i(TAG, "Switch is off!!" );
                         viewHolder.saved = false;
-//                        textView2.setText("This is an example Body text2... ");
                         Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
 
 
-
-
-//                        viewHolder.switchView.setChecked(false);
-//                        viewHolder.switchView.set
-
                     }
-//                    Log.i(TAG, "value after:" + viewHolder.switchView.getShowText());
-//                    Log.i(TAG, "value 2:" + viewHolder.switchView.getText());
-                    Log.i(TAG, "value after:" + viewHolder.saved);
 
-
-
-//                    Toast.makeText(mContext,"Clicked",Toast.LENGTH_LONG).show();
                 }
             });
             viewHolder.saved = viewHolder.switchView.getShowText();
-//            viewHolder.switchView = switchView;
-//            viewHolder.text = dataView.findViewById(R.id.text);
+
             dataView.setTag(viewHolder);
 
         }
@@ -125,7 +91,6 @@ class NewsViewAdapter extends BaseAdapter {
 
         //Set the data in the data View
 
-//        storedViewHolder.text.setText(getItem(position));
 
         return dataView;
     }
