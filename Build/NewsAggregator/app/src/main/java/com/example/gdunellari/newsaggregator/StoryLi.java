@@ -9,9 +9,10 @@ import android.graphics.Bitmap;
 public class StoryLi {
 
     private Bitmap urlImage;
+    private String urlArticle;
     private String title;
     private String description;
-
+    private String archiveFilename;
 
     public StoryLi(Bitmap urlImage, String title, String description) {
         this.urlImage = urlImage;
@@ -30,4 +31,13 @@ public class StoryLi {
     public String getDescription() {
         return description;
     }
+
+    public String getUrlArticle() {
+        return urlArticle;
+    }
+
+    public String getArchiveFilename() {
+        return archiveFilename;
+    }
+
 }
