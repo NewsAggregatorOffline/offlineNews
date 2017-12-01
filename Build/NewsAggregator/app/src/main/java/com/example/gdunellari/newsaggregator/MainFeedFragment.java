@@ -4,9 +4,12 @@ import android.app.ListFragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * Created by davidschlegel on 11/30/17.
@@ -14,12 +17,11 @@ import android.view.ViewGroup;
 
 public class MainFeedFragment extends ListFragment {
 
-
+     NewsViewAdapter newsViewAdapter;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final NewsViewAdapter newsViewAdapter = new NewsViewAdapter(getContext());
+         newsViewAdapter = new NewsViewAdapter(getContext());
 
         setListAdapter(newsViewAdapter);
 
@@ -33,4 +35,41 @@ public class MainFeedFragment extends ListFragment {
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // position = individual list item
+        // can also get individual list item by doing newsViewAdapter.get...()
+        super.onListItemClick(l, v, position, id);
+
+
+//        Log.d("CREATION", "HERE--------------------------------------------------");
+        Toast.makeText(getContext(),"You just clicked the screen!",Toast.LENGTH_LONG).show();
+
+//        View ib = l.findViewById(R.id.bodyText);
+        //View ib = l.findViewById(R.id.urlImage);
+//        if(ib==null) {
+//            Toast.makeText(getContext(),"HERE2",Toast.LENGTH_LONG).show();
+//        }
+
+
+//        View ib = l.findViewById(R);
+//        ib.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(),"HERE2",Toast.LENGTH_LONG).show();
+//            }
+//        });
+
+//        final NewsViewAdapter.ViewHolder viewHolder = new NewsViewAdapter.ViewHolder();
+//        viewHolder.switchView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(),"HERE2",Toast.LENGTH_LONG).show();
+//            }
+//        });
+
+    }
+
 }

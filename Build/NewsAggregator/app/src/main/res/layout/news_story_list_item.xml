@@ -17,7 +17,9 @@
         android:layout_height="200dp"
         android:orientation="horizontal"
         android:layout_weight="0.18"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:descendantFocusability="blocksDescendants">
+
 
         <RelativeLayout
             android:layout_width="83dp"
