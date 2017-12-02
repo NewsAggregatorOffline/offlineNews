@@ -13,6 +13,7 @@ public class StoryLi {
     private String title;
     private String description;
     private String archiveFilename;
+    private Boolean isSaved = false;
 
     public StoryLi(Bitmap urlImage, String title, String description) {
         this.urlImage = urlImage;
@@ -38,6 +39,10 @@ public class StoryLi {
 
     public String getArchiveFilename() {
         return archiveFilename;
+    }
+
+    public boolean getIsSaved() {
+        return isSaved;
     }
 
 }
