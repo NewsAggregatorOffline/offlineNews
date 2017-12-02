@@ -88,14 +88,14 @@ public class MainActivity extends Activity {
         incogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Fix color change on button for incognito toggle
-
                 if(incognito == false) {
                     incognito = true;
-                    incogBtn.setBackgroundColor(Color.CYAN);
+//                    incogBtn.setBackgroundColor(Color.BLACK);
+                    getWindow().getDecorView().setBackgroundColor(Color.LTGRAY);
                 } else{
                     incognito = false;
-                    incogBtn.setBackgroundColor(Color.TRANSPARENT);
+//                    incogBtn.setBackgroundColor(Color.TRANSPARENT);
+                    getWindow().getDecorView().setBackgroundColor(Color.WHITE);
                 }
             }
         });
