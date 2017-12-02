@@ -85,7 +85,7 @@ public class MainFeedFragment extends ListFragment {
         StoryLi storyLi = (StoryLi) newsViewAdapter.getItem(position);
         Intent intent = new Intent(MainFeedFragment.this.getActivity(), DisplayActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("article", storyLi);
+        bundle.putParcelable("article", storyLi);
         bundle.putBoolean("file",storyLi.isSaved());
         intent.putExtras(bundle);
         startActivity(intent);
