@@ -2,6 +2,7 @@ package com.example.gdunellari.newsaggregator;
 
 import android.app.LauncherActivity;
 import android.app.ListFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +35,17 @@ public class MainFeedFragment extends ListFragment {
     private static NewsViewAdapter newsViewAdapter;
 
 
+
+    public static MainFeedFragment instantiate(Context context, String fname){
+        //TODO: Do we need to do anything with contect and fname?
+
+        MainFeedFragment fragment = new MainFeedFragment();
+
+        return fragment;
+
+    }
+
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -64,7 +76,6 @@ public class MainFeedFragment extends ListFragment {
             } else {
                 Log.i(TAG, "received null response");
             }
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -72,8 +83,6 @@ public class MainFeedFragment extends ListFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -106,4 +115,4 @@ Toast.makeText(getContext(), "This is wut it iz returnin: "+ newsViewAdapter.get
 Parameters:
 position = individual list item
 can also get individual list item by doing newsViewAdapter.get...()
- */
+*/

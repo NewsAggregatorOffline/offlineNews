@@ -50,8 +50,6 @@ public class DisplayActivity extends AppCompatActivity {
                 Log.i(TAG,"url is not valid");
             }
         }
-
-
     }
 
     private boolean isNetworkAvailable() {
