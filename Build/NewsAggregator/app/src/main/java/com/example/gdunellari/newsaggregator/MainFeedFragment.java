@@ -64,7 +64,6 @@ public class MainFeedFragment extends ListFragment {
             } else {
                 Log.i(TAG, "received null response");
             }
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -72,8 +71,6 @@ public class MainFeedFragment extends ListFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -106,4 +103,4 @@ Toast.makeText(getContext(), "This is wut it iz returnin: "+ newsViewAdapter.get
 Parameters:
 position = individual list item
 can also get individual list item by doing newsViewAdapter.get...()
- */
+*/

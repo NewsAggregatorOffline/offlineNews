@@ -24,7 +24,6 @@ public class DisplayActivity extends AppCompatActivity {
             article = (StoryLi) data.get("article");
             readFromFile = data.getBoolean("file");
         }
-
     }
 
     private boolean isNetworkAvailable() {
