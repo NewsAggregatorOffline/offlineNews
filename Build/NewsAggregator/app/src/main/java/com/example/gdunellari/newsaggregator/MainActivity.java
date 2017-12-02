@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 
         incognito = false;
 
-        // Create the adapter for the color palettes
+        // Create the adapter for the FeedFragments
 //        FeedFragmentAdapter feedFragmentAdapter = new FeedFragmentAdapter(getFragmentManager());
         FeedFragmentAdapter feedFragmentAdapter = new FeedFragmentAdapter(getFragmentManager());
 
@@ -139,7 +139,7 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Adapter for color palette color view
+     * Adapter for FeedFragment view
      */
     public class FeedFragmentAdapter extends FragmentPagerAdapter {
         public FeedFragmentAdapter(FragmentManager fm) {
@@ -147,8 +147,8 @@ public class MainActivity extends Activity {
         }
 
         /**
-         * getItem() is called to instantiate the fragment for the given color palette.
-         * Returns a PlaceholderFragment (defined as a static inner class below).
+         * getItem() is called to instantiate the fragment for the given FeedFragmentAdapter.
+         *
          */
 
         @Override
@@ -175,7 +175,7 @@ public class MainActivity extends Activity {
         }
 
         /*
-         * Returns the title (name) for the current color palette.
+         * Returns the title (name) for the current FeedFragment.
          */
         @Override
         public CharSequence getPageTitle(int position) {
