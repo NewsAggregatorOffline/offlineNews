@@ -48,7 +48,6 @@ class NewsViewAdapter extends BaseAdapter {
             // Not recycled. Create the View
             dataView = mLayoutInflater.inflate(R.layout.news_story_list_item, parent, false);
 
-
             // Cache View information in ViewHolder Object
             ViewHolder viewHolder = new ViewHolder();
 
@@ -91,7 +90,7 @@ class NewsViewAdapter extends BaseAdapter {
         storedViewHolder.image.setImageBitmap(storyLi.getUrlImage());
         storedViewHolder.text1.setText(storyLi.getTitle());
         storedViewHolder.text2.setText(storyLi.getDescription());
-        storedViewHolder.switchView.setChecked(storyLi.getIsSaved());
+        storedViewHolder.switchView.setChecked(storyLi.isSaved());
 
         //Set the data in the data View
         return dataView;

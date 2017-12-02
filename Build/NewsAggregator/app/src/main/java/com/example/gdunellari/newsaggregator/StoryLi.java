@@ -2,18 +2,20 @@ package com.example.gdunellari.newsaggregator;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
+
 /**
  * Created by davidschlegel on 11/28/17.
  */
 
-public class StoryLi {
+public class StoryLi  implements Serializable{
 
     private Bitmap urlImage;
     private String urlArticle;
     private String title;
     private String description;
     private String archiveFilename;
-    private Boolean isSaved = false;
+    private boolean saved = false;
 
     public StoryLi(Bitmap urlImage, String title, String description) {
         this.urlImage = urlImage;
@@ -41,8 +43,11 @@ public class StoryLi {
         return archiveFilename;
     }
 
-    public boolean getIsSaved() {
-        return isSaved;
+    public boolean isSaved() {
+        return saved;
     }
 
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
 }
