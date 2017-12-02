@@ -52,13 +52,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        FragmentManager fm = getFragmentManager();
-//
-//        if (fm.findFragmentById(android.R.id.content) == null) {
-//            MainFeedFragment list = new MainFeedFragment();
-//            fm.beginTransaction().add(android.R.id.content, list).commit();
-//        }
-
         setContentView(R.layout.main_activity);
 
         incognito = false;

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,23 +34,23 @@ public class MainFeedFragment extends ListFragment {
     private static final String API_ENDPOINT = "https://newsapi.org/v2/everything?q=bitcoin&sortBy=popularity&apiKey=62a0b24bfa1f4484bfa9043021f4e8c8";
     private static JSONArray articles;
     private static NewsViewAdapter newsViewAdapter;
+    private static Context mContext;
 
 
 
     public static MainFeedFragment instantiate(Context context, String fname){
         //TODO: Do we need to do anything with contect and fname?
-
         MainFeedFragment fragment = new MainFeedFragment();
-
+        mContext = context;
         return fragment;
 
     }
 
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-         newsViewAdapter = new NewsViewAdapter(getContext());
+         newsViewAdapter = new NewsViewAdapter(mContext);
 
         setListAdapter(newsViewAdapter);
 
@@ -61,7 +62,6 @@ public class MainFeedFragment extends ListFragment {
 //        newsViewAdapter.add( new StoryLi(imageBitmap1, "Trump talks 'China GDP'", "President Trump said differences over policy..."));
 //        newsViewAdapter.add( new StoryLi(imageBitmap2, "U.S Stocks do well", "U.S Stocks rally to record levels never seen before..."));
 //        newsViewAdapter.add( new StoryLi(imageBitmap3, "Eight senators work on tax plan", "Senate Republican leaders meet to speak over the latest tax plan..."));
-
 
         try {
             JSONObject responseJson = (new ApiConnectionTask().execute(API_ENDPOINT)).get();
@@ -76,13 +76,10 @@ public class MainFeedFragment extends ListFragment {
             } else {
                 Log.i(TAG, "received null response");
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

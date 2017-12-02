@@ -41,7 +41,6 @@ public class DisplayActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         } else {
-            Toast.makeText(this,"Loading URL: " + url,Toast.LENGTH_LONG).show();
             Log.i(TAG,"Loading URL: " + url);
 
             if(url != null && URLUtil.isValidUrl(url)) {
