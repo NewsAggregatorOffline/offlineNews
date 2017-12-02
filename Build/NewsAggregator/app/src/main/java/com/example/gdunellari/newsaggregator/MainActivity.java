@@ -100,12 +100,12 @@ public class MainActivity extends Activity {
             }
         });
 
-        final ImageButton refreshBtn = (ImageButton) findViewById(R.id.imageButton2);
-        incogBtn.setOnClickListener(new View.OnClickListener() {
+        final ImageButton refreshBtn = (ImageButton) findViewById(R.id.imageButton3);
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Refresh feed onClick
-
+                finish();
+                startActivity(getIntent());
             }
         });
 
