@@ -4,11 +4,41 @@ import android.graphics.Bitmap;
 
 import java.io.Serializable;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by davidschlegel on 11/28/17.
  */
 
 public class StoryLi  implements Serializable{
+
+//    TODO remove Parcelable overrides
+//    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+//        public StoryLi createFromParcel(Parcel in) {
+//            return new StoryLi(in);
+//        }
+//
+//        public StoryLi[] newArray(int size) {
+//            return new StoryLi[size];
+//        }
+//    };
+//
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel parcel, int i) {
+//
+//        parcel.writeString(urlArticle);
+//        parcel.writeString(title);
+//        parcel.writeString(description);
+//        parcel.writeString(archiveFilename);
+//        parcel.writeB
+//
+//    }
 
     private byte[] urlImage;
     private String urlArticle;
