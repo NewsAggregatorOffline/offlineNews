@@ -2,6 +2,7 @@ package com.example.gdunellari.newsaggregator;
 
 import android.app.LauncherActivity;
 import android.app.ListFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,6 +33,15 @@ public class MainFeedFragment extends ListFragment {
     private static final String API_ENDPOINT = "https://newsapi.org/v2/everything?q=bitcoin&sortBy=popularity&apiKey=62a0b24bfa1f4484bfa9043021f4e8c8";
     private static JSONArray articles;
      NewsViewAdapter newsViewAdapter;
+
+    public static MainFeedFragment instantiate(Context context, String fname){
+        //TODO: Do we need to do anything with contect and fname?
+
+        MainFeedFragment fragment = new MainFeedFragment();
+
+        return fragment;
+
+    }
 
      
     @Override
