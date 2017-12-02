@@ -1,6 +1,7 @@
 package com.example.gdunellari.newsaggregator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;

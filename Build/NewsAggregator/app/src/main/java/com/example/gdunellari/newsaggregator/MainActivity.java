@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -111,6 +112,8 @@ public class MainActivity extends Activity {
 
 
     }
+
+
 
     /**
      * Handle click on the NavigationDrawer
