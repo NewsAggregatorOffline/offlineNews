@@ -19,28 +19,24 @@ import java.io.ObjectOutputStream;
  * Created by juneh on 11/30/2017.
  */
 
-public class ArchiveTask extends AsyncTask<String, Long, StringBuilder> {
+public class ArchiveTask extends AsyncTask<StoryLi, Long, Void> {
     private static final String TAG = "ARCHIVE";
-    private static String FILEPATH;
+    private static String filePath;
 
     private static Context context;
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        FILEPATH =  context.getFilesDir().getPath() + "/archived/";
-    }
-
-    public ArchiveTask(Context context) {
+    public ArchiveTask(Context context, String filePath) {
         this.context = context;
+        this.filePath =  context.getFilesDir().getPath() + filePath;
     }
 
     @Override
-    protected StringBuilder doInBackground(String... args) {
+    protected Void doInBackground(StoryLi... args) {
         Log.d(TAG, "reading from jsoup response");
 
-        String url = args[0];
-        String filename = args[1];
+        StoryLi article = args[0];
+        String filename = article.getArchiveFilename();
+        String url = article.getUrlArticle();
         StringBuilder page = new StringBuilder();
 
         try {
@@ -54,20 +50,14 @@ public class ArchiveTask extends AsyncTask<String, Long, StringBuilder> {
             for (Element e : doc.getAllElements()) {
                 page.append(e);
             }
+            article.setData(page.toString());
 
-            File filePath = new File(FILEPATH);
-            if(!filePath.exists()){
-                filePath.mkdirs();
+            File dir = new File(filePath);
+            if(!dir.exists()){
+                dir.mkdirs();
             }
-            serialization(new File(FILEPATH+filename), page);
 
-            /* Usage on WebView Component */
-            //            mWebView.post(new Runnable() {
-            //                @Override
-            //                public void run() {
-            //                    mWebView.loadDataWithBaseURL(null, page.toString(), "text/html", "UTF-8", null);
-            //                }
-            //            });
+            serialization(new File(filePath+filename), article);
 
 
         } catch (IOException e) {
@@ -76,8 +66,7 @@ public class ArchiveTask extends AsyncTask<String, Long, StringBuilder> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return page;
+        return null;
     }
 
 //--------------------------------------------------------------------------------------------------

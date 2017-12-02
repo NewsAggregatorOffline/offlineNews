@@ -15,30 +15,25 @@ import java.io.ObjectInputStream;
  * Created by juneh on 11/30/2017.
  */
 
-public class LoadArchiveTask extends AsyncTask<String, Float, StringBuilder> {
+public class LoadArchiveTask extends AsyncTask<String, Float, StoryLi> {
 
     private static final String TAG = "LOAD_ARCHIVE";
-    private static String FILEPATH;
+    private static String filePath;
     private static Context context;
 
-    public LoadArchiveTask(Context context) {
+    public LoadArchiveTask(Context context, String filePath) {
         this.context = context;
+        this.filePath = filePath;
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        FILEPATH =  context.getFilesDir().getPath() + "/archived/";
-    }
-
-    @Override
-    protected StringBuilder doInBackground(String... args) {
+    protected StoryLi doInBackground(String... args) {
         Log.d(TAG, "reading from archive");
 
         String filename = args[0];
-        StringBuilder page = new StringBuilder();
+        StoryLi article = null;
         try {
-            page = (StringBuilder) deSerialization(FILEPATH + filename);
+            article = (StoryLi) deSerialization(filePath + filename);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
 
@@ -47,7 +42,7 @@ public class LoadArchiveTask extends AsyncTask<String, Float, StringBuilder> {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return page;
+        return article;
     }
 
 

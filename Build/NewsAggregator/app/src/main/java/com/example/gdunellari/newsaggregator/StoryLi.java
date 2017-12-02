@@ -10,20 +10,23 @@ import java.io.Serializable;
 
 public class StoryLi  implements Serializable{
 
-    private Bitmap urlImage;
+    private byte[] urlImage;
     private String urlArticle;
     private String title;
     private String description;
     private String archiveFilename;
+    private String data;
     private boolean saved = false;
 
-    public StoryLi(Bitmap urlImage, String title, String description) {
+    public StoryLi(String urlArticle, byte[] urlImage, String title, String description) {
+        this.urlArticle = urlArticle;
         this.urlImage = urlImage;
         this.title = title;
         this.description = description;
+        archiveFilename = title.trim().replaceAll("[^A-Za-z]+","");
     }
 
-    public Bitmap getUrlImage() {
+    public byte[] getUrlImage() {
         return urlImage;
     }
 
@@ -49,5 +52,13 @@ public class StoryLi  implements Serializable{
 
     public void setSaved(boolean saved) {
         this.saved = saved;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data){
+        this.data = data;
     }
 }

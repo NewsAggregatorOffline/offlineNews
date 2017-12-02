@@ -1,6 +1,8 @@
 package com.example.gdunellari.newsaggregator;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,7 @@ class NewsViewAdapter extends BaseAdapter {
 
     private final LayoutInflater mLayoutInflater;
     private static final String TAG = "issues";
-    final List<StoryLi> mItems = new ArrayList<StoryLi>();
+    private static final List<StoryLi> mItems = new ArrayList<StoryLi>();
     private final Context mContext;
 
 
@@ -38,9 +40,7 @@ class NewsViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View dataView = convertView;
-        StoryLi storyLi = mItems.get(position);
 
         // Check for recycled View
         if (null == dataView) {
@@ -60,22 +60,6 @@ class NewsViewAdapter extends BaseAdapter {
             viewHolder.image = imageView;
 
             viewHolder.switchView = dataView.findViewById(R.id.saveSwitch);
-            viewHolder.switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                public void onCheckedChanged(CompoundButton cb, boolean on) {
-
-                    if(on){
-                        Log.i(TAG, "Switch is on!!" );
-                        Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
-
-                    }else{
-                        Log.i(TAG, "Switch is off!!" );
-                        Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
-
-
-                    }
-
-                }
-            });
             viewHolder.saved = viewHolder.switchView.getShowText();
 
             dataView.setTag(viewHolder);
@@ -86,10 +70,44 @@ class NewsViewAdapter extends BaseAdapter {
 
         // Retrieve the viewHolder Object
         ViewHolder storedViewHolder = (ViewHolder) dataView.getTag();
+        StoryLi storyLi = mItems.get(position);
 
-        storedViewHolder.image.setImageBitmap(storyLi.getUrlImage());
+        Bitmap bitmap = null;
+        try {
+            bitmap = new ReadImageByteArrayTask().execute(storyLi.getUrlImage()).get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(bitmap != null) storedViewHolder.image.setImageBitmap(bitmap);
         storedViewHolder.text1.setText(storyLi.getTitle());
         storedViewHolder.text2.setText(storyLi.getDescription());
+
+        storedViewHolder.switchView.setTag(position);
+        storedViewHolder.switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton cb, boolean on) {
+                StoryLi storyLi = mItems.get((Integer) cb.getTag());
+
+                if(on){
+                    Log.i(TAG, "Switch is on!!" );
+                    try {
+                        storyLi.setSaved(true);
+                        new ArchiveTask(mContext, "/archived/").execute(storyLi).get();
+                    } catch (Exception e) {
+                        Log.i(TAG, "failed to save article" );
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
+
+                }else{
+                    Log.i(TAG, "Switch is off!!" );
+                    storyLi.setSaved(false);
+                    Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
         storedViewHolder.switchView.setChecked(storyLi.isSaved());
 
         //Set the data in the data View
