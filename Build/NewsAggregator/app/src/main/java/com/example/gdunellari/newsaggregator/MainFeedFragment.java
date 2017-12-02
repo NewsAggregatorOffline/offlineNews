@@ -1,6 +1,8 @@
 package com.example.gdunellari.newsaggregator;
 
+import android.app.LauncherActivity;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -39,37 +41,30 @@ public class MainFeedFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        // position = individual list item
-        // can also get individual list item by doing newsViewAdapter.get...()
         super.onListItemClick(l, v, position, id);
 
-
-//        Log.d("CREATION", "HERE--------------------------------------------------");
-        Toast.makeText(getContext(),"You just clicked the screen!",Toast.LENGTH_LONG).show();
-
-//        View ib = l.findViewById(R.id.bodyText);
-        //View ib = l.findViewById(R.id.urlImage);
-//        if(ib==null) {
-//            Toast.makeText(getContext(),"HERE2",Toast.LENGTH_LONG).show();
-//        }
-
-
-//        View ib = l.findViewById(R);
-//        ib.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getContext(),"HERE2",Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-//        final NewsViewAdapter.ViewHolder viewHolder = new NewsViewAdapter.ViewHolder();
-//        viewHolder.switchView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getContext(),"HERE2",Toast.LENGTH_LONG).show();
-//            }
-//        });
-
+        StoryLi storyLi = (StoryLi) newsViewAdapter.getItem(position);
+        Intent intent = new Intent(MainFeedFragment.this.getActivity(), DisplayActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("article", storyLi);
+        bundle.putBoolean("file",storyLi.isSaved());
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
-
 }
+
+
+/*
+For onListItemClick...
+
+Testing Code:
+Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+Log.d("CREATION", "HERE--------------------------------------------------");
+Log.d("CREATION", "This is wut it iz returnin: "+ newsViewAdapter.getItem(position).getClass().getSimpleName() );
+Toast.makeText(getContext(), "This is wut it iz returnin: "+ newsViewAdapter.getItem(position).getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
+
+
+Parameters:
+position = individual list item
+can also get individual list item by doing newsViewAdapter.get...()
+ */

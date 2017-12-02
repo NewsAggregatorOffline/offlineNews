@@ -40,7 +40,7 @@ class NewsViewAdapter extends BaseAdapter {
 
             // Not recycled. Create the View
             dataView = mLayoutInflater.inflate(R.layout.news_story_list_item, parent, false);
-            StoryLi storyLi = mItems.get(position);
+            final StoryLi storyLi = mItems.get(position);
 
 
             // Cache View information in ViewHolder Object
@@ -66,11 +66,13 @@ class NewsViewAdapter extends BaseAdapter {
                     if(on){
                         Log.i(TAG, "Switch is on!!" );
                         viewHolder.saved = true;
+                        storyLi.setSaved(true);
                         Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
 
                     }else{
                         Log.i(TAG, "Switch is off!!" );
                         viewHolder.saved = false;
+                        storyLi.setSaved(false);
                         Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
 
 
