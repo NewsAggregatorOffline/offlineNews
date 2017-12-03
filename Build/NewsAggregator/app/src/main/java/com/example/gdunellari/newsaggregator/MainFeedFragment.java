@@ -108,6 +108,16 @@ public class MainFeedFragment extends ListFragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    @Override
+    public void onStart() {
+
+        if(! isNetworkAvailable()) {
+            ListView lv = getListView();
+            lv.setBackground(getResources().getDrawable(R.drawable.no_connection_image));
+        }
+        super.onStart();
+    }
+
 
 
 
@@ -149,12 +159,12 @@ public class MainFeedFragment extends ListFragment {
 //        return object;
 //    }
 //
-//    private boolean isNetworkAvailable() {
-//        ConnectivityManager connectivityManager
-//                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-//    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
 //--------------------------------------------------------------------------------------------------
 
