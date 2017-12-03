@@ -21,9 +21,9 @@ public class LoadArchiveTask extends AsyncTask<String, Float, StoryLi> {
     private static String filePath;
     private static Context context;
 
-    public LoadArchiveTask(Context context, String filePath) {
+    public LoadArchiveTask(Context context) {
         this.context = context;
-        this.filePath = context.getFilesDir().getPath() + filePath;
+        this.filePath = context.getFilesDir().getPath() + "/archived/";
     }
 
     @Override
