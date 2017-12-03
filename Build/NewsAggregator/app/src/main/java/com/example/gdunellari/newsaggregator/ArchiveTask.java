@@ -19,6 +19,9 @@ import java.io.ObjectOutputStream;
  * Created by juneh on 11/30/2017.
  */
 
+/**
+ * Creates background task
+ */
 public class ArchiveTask extends AsyncTask<StoryLi, Long, Boolean> {
     private static final String TAG = "ARCHIVE";
     private static String filePath;

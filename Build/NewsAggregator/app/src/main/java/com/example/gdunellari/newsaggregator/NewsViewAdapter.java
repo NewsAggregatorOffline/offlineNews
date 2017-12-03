@@ -100,10 +100,10 @@ class NewsViewAdapter extends BaseAdapter {
                             if(success) {
                                 archiveMap.put(storyLi.getTitle(), storyLi.getArchiveFilename());
                                 ArchiveHelper.serialization(archiveMap, new File(storyLi.getArchiveFilename()));
-                                Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
+                                Toast.makeText(mContext,"Story Saved",Toast.LENGTH_SHORT).show();
                             } else {
                                 cb.setChecked(false);
-                                Toast.makeText(mContext,"Failed to save story. \nCheck internet connection",Toast.LENGTH_LONG).show();
+                                Toast.makeText(mContext,"Failed to save story. \nCheck internet connection",Toast.LENGTH_SHORT).show();
                             }
                         }
                     } catch (Exception e) {
@@ -121,7 +121,7 @@ class NewsViewAdapter extends BaseAdapter {
                                 archiveMap.remove(storyLi.getTitle());
                                 /* TODO delete archive file */
                                 ArchiveHelper.serialization(archiveMap, new File(storyLi.getArchiveFilename()));
-                                Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
+                                Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (Exception e) {

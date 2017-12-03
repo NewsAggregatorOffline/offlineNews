@@ -106,12 +106,12 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 if(incognito == false) {
                     incognito = true;
-                    Toast.makeText(getApplicationContext(),"Incognito Mode is On",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Incognito Mode is On",Toast.LENGTH_SHORT).show();
                     incogBtn.setBackgroundColor(Color.CYAN);
                     getWindow().getDecorView().setBackgroundColor(Color.LTGRAY);
                 } else{
                     incognito = false;
-                    Toast.makeText(getApplicationContext(),"Incognito Mode is Off",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Incognito Mode is Off",Toast.LENGTH_SHORT).show();
                     incogBtn.setBackgroundColor(Color.TRANSPARENT);
                     getWindow().getDecorView().setBackgroundColor(Color.WHITE);
                 }
