@@ -3,6 +3,8 @@ package com.example.gdunellari.newsaggregator;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -32,7 +34,7 @@ import java.util.concurrent.ExecutionException;
  * Created by davidschlegel on 11/30/17.
  */
 
-public class MainFeedFragment extends ListFragment {
+public class ArchiveFeedFragment extends ListFragment {
     private static final String TAG = "FEED_FRAGMENT";
     private static final String API_ENDPOINT = "https://newsapi.org/v2/everything?q=bitcoin&sortBy=popularity&apiKey=62a0b24bfa1f4484bfa9043021f4e8c8";
     private static File archiveFile;
@@ -43,11 +45,10 @@ public class MainFeedFragment extends ListFragment {
 
 
 
-    public static MainFeedFragment instantiate(Context context, String fname){
+    public static ArchiveFeedFragment instantiate(Context context, String fname){
         //TODO: Do we need to do anything with contect and fname?
         Log.i("About to create", fname);
-
-        MainFeedFragment fragment = new MainFeedFragment();
+        ArchiveFeedFragment fragment = new ArchiveFeedFragment();
         mContext = context;
         archiveFile = new File(context.getFilesDir().getPath() + "/archived/Archive.dat");
 
@@ -75,30 +76,33 @@ public class MainFeedFragment extends ListFragment {
 
         /* TODO Remove test data */
 //        final Bitmap imageBitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.shumer_trump);
-//        final Bitmap imageBitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.us_stocks);
+        final Bitmap imageBitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.us_stocks);
 //        final Bitmap imageBitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.gop_tax_plan);
 //        newsViewAdapter.add( new StoryLi(imageBitmap1, "Trump talks 'China GDP'", "President Trump said differences over policy..."));
 //        newsViewAdapter.add( new StoryLi(imageBitmap2, "U.S Stocks do well", "U.S Stocks rally to record levels never seen before..."));
 //        newsViewAdapter.add( new StoryLi(imageBitmap3, "Eight senators work on tax plan", "Senate Republican leaders meet to speak over the latest tax plan..."));
-      
+
         try {
-            JSONObject responseJson = (new ApiConnectionTask().execute(API_ENDPOINT)).get();
-            articles = responseJson.getJSONArray("articles");
-            if(articles != null) {
-                Log.i(TAG, "received response content of " + articles.length() + "articles");
-                for(int i = 0; i < articles.length(); i++) {
-                    JSONObject article = articles.getJSONObject(i);
-                    if(archiveMap.containsKey(article.getString("title"))) {
-//                        String filename = archiveMap.get(article.getString("title"));
-//                        newsViewAdapter.add(new LoadArchiveTask(mContext).execute(filename).get());
-                    } else {
-                        byte[] imageByteArray = new ImageFromUrlTask().execute(article.getString("urlToImage")).get();
-                        newsViewAdapter.add( new StoryLi(article.getString("url"),imageByteArray, article.getString("title"), article.getString("description")));
-                    }
+//            JSONObject responseJson = (new ApiConnectionTask().execute(API_ENDPOINT)).get();
+//            articles = responseJson.getJSONArray("articles");
+//            if(articles != null) {
+//                Log.i(TAG, "received response content of " + articles.length() + "articles");
+
+            Object[] storyKeys = archiveMap.keySet().toArray();
+
+                for(int i = 0; i < archiveMap.size(); i++) {
+//                    JSONObject article = articles.getJSONObject(i);
+//                    if(archiveMap.containsKey(article.getString("title"))) {
+                        String filename = archiveMap.get((String)storyKeys[i]);
+                        newsViewAdapter.add(new LoadArchiveTask(mContext).execute(filename).get());
+//                    } else {
+//                        byte[] imageByteArray = new ImageFromUrlTask().execute(article.getString("urlToImage")).get();
+//                        newsViewAdapter.add( new StoryLi(article.getString("url"),imageByteArray, article.getString("title"), article.getString("description")));
+//                    }
                 }
-            } else {
-                Log.i(TAG, "received null response");
-            }
+//            } else {
+//                Log.i(TAG, "received null response");
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,7 +118,7 @@ public class MainFeedFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
         StoryLi storyLi = (StoryLi) newsViewAdapter.getItem(position);
-        Intent intent = new Intent(MainFeedFragment.this.getActivity(), DisplayActivity.class);
+        Intent intent = new Intent(ArchiveFeedFragment.this.getActivity(), DisplayActivity.class);
         intent.putExtra("fileName",storyLi.getArchiveFilename());
         intent.putExtra("url",storyLi.getUrlArticle());
         intent.putExtra("isSaved", storyLi.isSaved());

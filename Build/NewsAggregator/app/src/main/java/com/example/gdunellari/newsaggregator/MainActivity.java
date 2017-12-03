@@ -62,6 +62,10 @@ public class MainActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
+    MainFeedFragment mainFeedFragment ;
+    ArchiveFeedFragment archiveFeedFragment;
+    MainFeedFragment settingsFragment ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +128,10 @@ public class MainActivity extends Activity {
         });
 
 
+         mainFeedFragment = MainFeedFragment.instantiate(getApplicationContext(), "news");
+         archiveFeedFragment =   ArchiveFeedFragment.instantiate(getApplicationContext(), "archiveNews");
+         settingsFragment = MainFeedFragment.instantiate(getApplicationContext(), "settings");
+
     }
 
 
@@ -169,19 +177,39 @@ public class MainActivity extends Activity {
 
         @Override
         public Fragment getItem(int position) {
-//            Log.i("fragment position: ", ""+position);
+            Log.i("fragment position: ", ""+position);
 
             //TODO: add the other fragments besides the main feed
 
+            switch (position){
+                case 0:
+                    return mainFeedFragment;
+
+//                    break;
+                case 1:
+                    return archiveFeedFragment;
+
+//                    break;
+
+                case 2:
+                    return settingsFragment;
+
+//                break;
+
+                default:
+                    return new Fragment();
+//                    break;
+            }
+
 //            if(position==1) {
 //                return ArchiveFeedFragment.instantiate(getApplicationContext(), "archiveNews");
-//            }else{
+//            }else if (position==0) {
 //                return MainFeedFragment.instantiate(getApplicationContext(), "news");
 //
+//            } else {
+//
+//                return MainFeedFragment.instantiate(getApplicationContext(), "settings");
 //            }
-
-            return MainFeedFragment.instantiate(getApplicationContext(), "news");
-
 
         }
 
