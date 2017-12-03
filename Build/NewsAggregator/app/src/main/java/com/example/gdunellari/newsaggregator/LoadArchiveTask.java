@@ -31,6 +31,8 @@ public class LoadArchiveTask extends AsyncTask<String, Float, StoryLi> {
         Log.d(TAG, "reading from archive");
 
         String filename = args[0];
+        Log.i(TAG, "file path: " + filePath+filename);
+
         StoryLi article = null;
         try {
             article = (StoryLi) deSerialization(filePath + filename);

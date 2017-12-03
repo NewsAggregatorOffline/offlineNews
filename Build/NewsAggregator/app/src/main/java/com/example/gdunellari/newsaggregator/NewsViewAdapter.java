@@ -31,7 +31,7 @@ class NewsViewAdapter extends BaseAdapter {
     private final List<StoryLi> mItems = new ArrayList<StoryLi>();
     private static HashMap<String, String> archiveMap;
     private final Context mContext;
-
+    private static File archiveFile;
 
 
     public NewsViewAdapter(Context context, HashMap archiveMap) {
@@ -40,6 +40,8 @@ class NewsViewAdapter extends BaseAdapter {
         mLayoutInflater = LayoutInflater.from(context);
 
         this.archiveMap = archiveMap;
+
+        archiveFile = new File(context.getFilesDir().getPath() + "/archived/Archive.dat");
     }
 
     @Override
@@ -99,8 +101,9 @@ class NewsViewAdapter extends BaseAdapter {
                             Boolean success = new ArchiveTask(mContext).execute(storyLi).get();
                             if(success) {
                                 archiveMap.put(storyLi.getTitle(), storyLi.getArchiveFilename());
-                                ArchiveHelper.serialization(archiveMap, new File(storyLi.getArchiveFilename()));
+                                ArchiveHelper.serialization(archiveMap, archiveFile);
                                 Toast.makeText(mContext,"Story Saved",Toast.LENGTH_SHORT).show();
+
                             } else {
                                 cb.setChecked(false);
                                 Toast.makeText(mContext,"Failed to save story. \nCheck internet connection",Toast.LENGTH_SHORT).show();
@@ -120,7 +123,8 @@ class NewsViewAdapter extends BaseAdapter {
                                 storyLi.setSaved(false);
                                 archiveMap.remove(storyLi.getTitle());
                                 /* TODO delete archive file */
-                                ArchiveHelper.serialization(archiveMap, new File(storyLi.getArchiveFilename()));
+                                new File(mContext.getFilesDir().getPath() + "/archived/" + storyLi.getArchiveFilename()).delete();
+                                ArchiveHelper.serialization(archiveMap, archiveFile);
                                 Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_SHORT).show();
 
                             }

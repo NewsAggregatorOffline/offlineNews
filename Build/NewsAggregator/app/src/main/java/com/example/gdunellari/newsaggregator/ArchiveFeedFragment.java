@@ -35,13 +35,13 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class ArchiveFeedFragment extends ListFragment {
-    private static final String TAG = "FEED_FRAGMENT";
+    private static final String TAG = "ARCHIVE_FEED_FRAGMENT";
     private static final String API_ENDPOINT = "https://newsapi.org/v2/everything?q=bitcoin&sortBy=popularity&apiKey=62a0b24bfa1f4484bfa9043021f4e8c8";
     private static File archiveFile;
     private static JSONArray articles;
+    private static Context mContext2;
     private  HashMap<String, String> archiveMap2;
     private  NewsViewAdapter newsViewAdapter2;
-    private  Context mContext2;
 
 
 
@@ -49,18 +49,15 @@ public class ArchiveFeedFragment extends ListFragment {
         //TODO: Do we need to do anything with contect and fname?
         Log.i("About to create", fname);
         ArchiveFeedFragment fragment = new ArchiveFeedFragment();
-//        mContext2 = context;
+        mContext2 = context;
         archiveFile = new File(context.getFilesDir().getPath() + "/archived/Archive.dat");
 
         return fragment;
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        mContext2 = getContext();
 
         if(archiveFile.exists()) {
             try {
@@ -72,6 +69,8 @@ public class ArchiveFeedFragment extends ListFragment {
             archiveMap2 = new HashMap<>();
         }
 
+        Log.i(TAG, "archive contains " + archiveMap2.size() + " items");
+
         newsViewAdapter2 = new NewsViewAdapter(mContext2, archiveMap2);
         setListAdapter(newsViewAdapter2);
 
@@ -82,7 +81,7 @@ public class ArchiveFeedFragment extends ListFragment {
 //        final Bitmap imageBitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.gop_tax_plan);
 //        newsViewAdapter.add( new StoryLi(imageBitmap1, "Trump talks 'China GDP'", "President Trump said differences over policy..."));
 //        newsViewAdapter2.add( new StoryLi(null,null, "U.S Stocks do well", "U.S Stocks rally to record levels never seen before..."));
-//        newsViewAdapter.add( new StoryLi(imageBitmap3, "Eight senators work on tax plan", "Senate Republican leaders meet to speak over the latest tax plan..."));
+//        newsViewAda pter.add( new StoryLi(imageBitmap3, "Eight senators work on tax plan", "Senate Republican leaders meet to speak over the latest tax plan..."));
 
         try {
 //            JSONObject responseJson = (new ApiConnectionTask().execute(API_ENDPOINT)).get();
@@ -90,21 +89,12 @@ public class ArchiveFeedFragment extends ListFragment {
 //            if(articles != null) {
 //                Log.i(TAG, "received response content of " + articles.length() + "articles");
 
-            Object[] storyKeys = archiveMap2.keySet().toArray();
-
-                for(int i = 0; i < 2; i++) {
-//                    JSONObject article = articles.getJSONObject(i);
-//                    if(archiveMap.containsKey(article.getString("title"))) {
-                        String filename = archiveMap2.get((String)storyKeys[i]);
-                        newsViewAdapter2.add(new LoadArchiveTask(mContext2).execute(filename).get());
-//                    } else {
-//                        byte[] imageByteArray = new ImageFromUrlTask().execute(article.getString("urlToImage")).get();
-//                        newsViewAdapter.add( new StoryLi(article.getString("url"),imageByteArray, article.getString("title"), article.getString("description")));
-//                    }
+                for(Map.Entry<String, String> entry : archiveMap2.entrySet()) {
+                    Log.i(TAG, "title " + entry.getKey());
+                    Log.i(TAG, "file: " + entry.getValue());
+                    String filename = entry.getValue();
+                    newsViewAdapter2.add(new LoadArchiveTask(mContext2).execute(filename).get());
                 }
-//            } else {
-//                Log.i(TAG, "received null response");
-//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
