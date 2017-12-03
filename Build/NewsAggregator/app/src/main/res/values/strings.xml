@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">UIListViewCustomAdapter</string>
+    <string name="app_name">Offline News Aggregator</string>
 
     <string-array name="colors">
         <item>red</item>
