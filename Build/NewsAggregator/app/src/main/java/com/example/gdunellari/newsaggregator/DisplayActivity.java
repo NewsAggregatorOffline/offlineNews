@@ -28,13 +28,15 @@ public class DisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display);
         mWebView = (WebView) findViewById(R.id.article_web_view);
         initWebView(mWebView, true);
+
         Bundle data = getIntent().getExtras();
-        String filename =  data.getString("filename");
+        String filename =  data.getString("fileName");
         String url = data.getString("url");
-        File file = new File(getApplicationContext().getFilesDir().getPath() + "/archived/" + filename);
-        if(file.exists()) {
+        boolean isSaved = data.getBoolean("isSaved");
+        if(isSaved) {
+            Log.i(TAG,"reading article from file");
             try {
-                article = new LoadArchiveTask(this,filename).get();
+                article = new LoadArchiveTask(getApplicationContext(),"/archived/").execute(filename).get();
                 mWebView.loadDataWithBaseURL(null, article.getData(), "text/html", "UTF-8", null);
 
             } catch (Exception e) {
@@ -60,7 +62,7 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     public void initWebView(WebView mWebView, boolean enabled) {
-        mWebView.setWebChromeClient(new WebChromeClient());
+//        mWebView.setWebChromeClient(new WebChromeClient());
 //
 //        Force using cache resources, even if they have expired
 //        mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
