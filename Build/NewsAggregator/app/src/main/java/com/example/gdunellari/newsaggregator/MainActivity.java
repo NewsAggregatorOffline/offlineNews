@@ -34,6 +34,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class MainActivity extends Activity {
@@ -75,6 +80,11 @@ public class MainActivity extends Activity {
                 R.layout.drawer_list_item,
                 fragmentNames));
 
+        //Set last date Updated
+        final TextView textView = (TextView) findViewById(R.id.textView);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:ms z");
+        textView.setText("Last Update: " + sdf.format(new Date()));
+
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -84,11 +94,13 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 if(incognito == false) {
                     incognito = true;
-//                    incogBtn.setBackgroundColor(Color.BLACK);
+                    Toast.makeText(getApplicationContext(),"Incognito Mode is On",Toast.LENGTH_LONG).show();
+                    incogBtn.setBackgroundColor(Color.CYAN);
                     getWindow().getDecorView().setBackgroundColor(Color.LTGRAY);
                 } else{
                     incognito = false;
-//                    incogBtn.setBackgroundColor(Color.TRANSPARENT);
+                    Toast.makeText(getApplicationContext(),"Incognito Mode is Off",Toast.LENGTH_LONG).show();
+                    incogBtn.setBackgroundColor(Color.TRANSPARENT);
                     getWindow().getDecorView().setBackgroundColor(Color.WHITE);
                 }
             }
