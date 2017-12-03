@@ -92,8 +92,9 @@ public class MainFeedFragment extends ListFragment {
 
         StoryLi storyLi = (StoryLi) newsViewAdapter.getItem(position);
         Intent intent = new Intent(MainFeedFragment.this.getActivity(), DisplayActivity.class);
-        intent.putExtra("filePath",storyLi.getArchiveFilename());
+        intent.putExtra("fileName",storyLi.getArchiveFilename());
         intent.putExtra("url",storyLi.getUrlArticle());
+        intent.putExtra("isSaved", storyLi.isSaved());
         startActivity(intent);
     }
 }

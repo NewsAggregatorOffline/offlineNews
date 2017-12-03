@@ -90,19 +90,22 @@ class NewsViewAdapter extends BaseAdapter {
                 if(on){
                     Log.i(TAG, "Switch is on!!" );
                     try {
-                        storyLi.setSaved(true);
-                        new ArchiveTask(mContext, "/archived/").execute(storyLi).get();
+                        if(!storyLi.isSaved()) {
+                            storyLi.setSaved(true);
+                            new ArchiveTask(mContext, "/archived/").execute(storyLi).get();
+                            Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
+                        }
                     } catch (Exception e) {
                         Log.i(TAG, "failed to save article" );
                         e.printStackTrace();
                     }
-                    Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
 
                 }else{
-                    Log.i(TAG, "Switch is off!!" );
-                    storyLi.setSaved(false);
-                    Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
-
+                    if(storyLi.isSaved()) {
+                        Log.i(TAG, "Switch is off!!" );
+                        storyLi.setSaved(false);
+                        Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }
