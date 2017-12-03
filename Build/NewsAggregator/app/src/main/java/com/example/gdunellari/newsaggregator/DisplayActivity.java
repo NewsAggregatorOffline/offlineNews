@@ -35,7 +35,7 @@ public class DisplayActivity extends AppCompatActivity {
         if(isSaved) {
             Log.i(TAG,"reading article from file");
             try {
-                article = new LoadArchiveTask(getApplicationContext(),"/archived/").execute(filename).get();
+                article = new LoadArchiveTask(getApplicationContext()).execute(filename).get();
                 mWebView.loadDataWithBaseURL(null, article.getData(), "text/html", "UTF-8", null);
 
             } catch (Exception e) {
@@ -51,13 +51,6 @@ public class DisplayActivity extends AppCompatActivity {
                 Log.i(TAG,"url is not valid");
             }
         }
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     public void initWebView(WebView mWebView, boolean enabled) {

@@ -19,25 +19,25 @@ import java.io.ObjectOutputStream;
  * Created by juneh on 11/30/2017.
  */
 
-public class ArchiveTask extends AsyncTask<StoryLi, Long, Void> {
+public class ArchiveTask extends AsyncTask<StoryLi, Long, Boolean> {
     private static final String TAG = "ARCHIVE";
     private static String filePath;
 
     private static Context context;
 
-    public ArchiveTask(Context context, String filePath) {
+    public ArchiveTask(Context context) {
         this.context = context;
-        this.filePath =  context.getFilesDir().getPath() + filePath;
+        this.filePath =  context.getFilesDir().getPath() + "/archived/";
     }
 
     @Override
-    protected Void doInBackground(StoryLi... args) {
-        Log.d(TAG, "reading from jsoup response");
+    protected Boolean doInBackground(StoryLi... args) {
 
         StoryLi article = args[0];
         String filename = article.getArchiveFilename();
         String url = article.getUrlArticle();
         StringBuilder page = new StringBuilder();
+        Log.d(TAG, "open jsoup connection");
 
         try {
             Connection.Response response = Jsoup.connect(url)
@@ -60,13 +60,12 @@ public class ArchiveTask extends AsyncTask<StoryLi, Long, Void> {
             serialization(new File(filePath+filename), article);
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d(TAG, "failed to read from jsoup response");
+            return false;
         }
-        return null;
+        return true;
     }
 
 //--------------------------------------------------------------------------------------------------

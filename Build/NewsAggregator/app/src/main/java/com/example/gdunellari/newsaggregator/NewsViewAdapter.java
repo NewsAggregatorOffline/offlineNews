@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -27,15 +28,17 @@ class NewsViewAdapter extends BaseAdapter {
     private final LayoutInflater mLayoutInflater;
     private static final String TAG = "issues";
     private static final List<StoryLi> mItems = new ArrayList<StoryLi>();
+    private static HashMap<String, String> archiveMap;
     private final Context mContext;
 
 
 
-    public NewsViewAdapter(Context context) {
+    public NewsViewAdapter(Context context, HashMap archiveMap) {
         mContext = context;
 
         mLayoutInflater = LayoutInflater.from(context);
 
+        this.archiveMap = archiveMap;
     }
 
     @Override
@@ -90,10 +93,17 @@ class NewsViewAdapter extends BaseAdapter {
                 if(on){
                     Log.i(TAG, "Switch is on!!" );
                     try {
-                        if(!storyLi.isSaved()) {
+                        if(!archiveMap.containsKey(storyLi.getTitle())) {
                             storyLi.setSaved(true);
-                            new ArchiveTask(mContext, "/archived/").execute(storyLi).get();
-                            Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
+                            Boolean success = new ArchiveTask(mContext).execute(storyLi).get();
+                            if(success) {
+                                archiveMap.put(storyLi.getTitle(), storyLi.getArchiveFilename());
+                                MainFeedFragment.serialization(archiveMap);
+                                Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
+                            } else {
+                                cb.setChecked(false);
+                                Toast.makeText(mContext,"Failed to save story. \nCheck internet connection",Toast.LENGTH_LONG).show();
+                            }
                         }
                     } catch (Exception e) {
                         Log.i(TAG, "failed to save article" );
@@ -101,10 +111,21 @@ class NewsViewAdapter extends BaseAdapter {
                     }
 
                 }else{
-                    if(storyLi.isSaved()) {
+                    if(archiveMap.containsKey(storyLi.getTitle())) {
                         Log.i(TAG, "Switch is off!!" );
-                        storyLi.setSaved(false);
-                        Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
+
+                        try {
+                            if(archiveMap.containsKey(storyLi.getTitle())) {
+                                storyLi.setSaved(false);
+                                archiveMap.remove(storyLi.getTitle());
+                                /* TODO delete archive file */
+                                MainFeedFragment.serialization(archiveMap);
+                                Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 
