@@ -38,7 +38,7 @@ public class MainFeedFragment extends ListFragment {
     private static File archiveFile;
     private static JSONArray articles;
     private static HashMap<String, String> archiveMap;
-    private static NewsViewAdapter newsViewAdapter;
+    private NewsViewAdapter newsViewAdapter;
     private static Context mContext;
 
 
@@ -48,7 +48,7 @@ public class MainFeedFragment extends ListFragment {
         Log.i("About to create", fname);
 
         MainFeedFragment fragment = new MainFeedFragment();
-        mContext = context;
+//        mContext = context;
         archiveFile = new File(context.getFilesDir().getPath() + "/archived/Archive.dat");
 
         return fragment;
@@ -61,13 +61,15 @@ public class MainFeedFragment extends ListFragment {
 
         if(archiveFile.exists()) {
             try {
-                archiveMap = (HashMap<String, String>) deSerialization(archiveFile.getPath());
+                archiveMap = (HashMap<String, String>) ArchiveHelper.deSerialization(archiveFile.getPath());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
             archiveMap = new HashMap<>();
         }
+
+        mContext= getContext();
 
         newsViewAdapter = new NewsViewAdapter(mContext, archiveMap);
         setListAdapter(newsViewAdapter);
@@ -113,6 +115,7 @@ public class MainFeedFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        Log.i(TAG, "check class : " + this.getClass().getSimpleName());
         StoryLi storyLi = (StoryLi) newsViewAdapter.getItem(position);
         Intent intent = new Intent(MainFeedFragment.this.getActivity(), DisplayActivity.class);
         intent.putExtra("fileName",storyLi.getArchiveFilename());
@@ -124,34 +127,34 @@ public class MainFeedFragment extends ListFragment {
 
 //--------------------------------------------------------------------------------------------------
 
-    public static void serialization(Object object) {
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(archiveFile);
-            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
-            objectOutputStream.writeObject(object);
-            objectOutputStream.close();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static Object deSerialization(String file) throws IOException, ClassNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream(file);
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
-        ObjectInputStream objectInputStream = new ObjectInputStream(bufferedInputStream);
-        Object object = objectInputStream.readObject();
-        objectInputStream.close();
-        return object;
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
+//    private static void serialization(Object object) {
+//        try {
+//            FileOutputStream fileOutputStream = new FileOutputStream(archiveFile);
+//            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
+//            objectOutputStream.writeObject(object);
+//            objectOutputStream.close();
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//    private static Object deSerialization(String file) throws IOException, ClassNotFoundException {
+//        FileInputStream fileInputStream = new FileInputStream(file);
+//        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+//        ObjectInputStream objectInputStream = new ObjectInputStream(bufferedInputStream);
+//        Object object = objectInputStream.readObject();
+//        objectInputStream.close();
+//        return object;
+//    }
+//
+//    private boolean isNetworkAvailable() {
+//        ConnectivityManager connectivityManager
+//                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+//    }
 
 //--------------------------------------------------------------------------------------------------
 

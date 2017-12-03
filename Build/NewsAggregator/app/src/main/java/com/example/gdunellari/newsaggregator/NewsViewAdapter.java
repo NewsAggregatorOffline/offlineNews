@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ class NewsViewAdapter extends BaseAdapter {
 
     private final LayoutInflater mLayoutInflater;
     private static final String TAG = "issues";
-    private static final List<StoryLi> mItems = new ArrayList<StoryLi>();
+    private final List<StoryLi> mItems = new ArrayList<StoryLi>();
     private static HashMap<String, String> archiveMap;
     private final Context mContext;
 
@@ -98,7 +99,7 @@ class NewsViewAdapter extends BaseAdapter {
                             Boolean success = new ArchiveTask(mContext).execute(storyLi).get();
                             if(success) {
                                 archiveMap.put(storyLi.getTitle(), storyLi.getArchiveFilename());
-                                MainFeedFragment.serialization(archiveMap);
+                                ArchiveHelper.serialization(archiveMap, new File(storyLi.getArchiveFilename()));
                                 Toast.makeText(mContext,"Story Saved",Toast.LENGTH_LONG).show();
                             } else {
                                 cb.setChecked(false);
@@ -119,7 +120,7 @@ class NewsViewAdapter extends BaseAdapter {
                                 storyLi.setSaved(false);
                                 archiveMap.remove(storyLi.getTitle());
                                 /* TODO delete archive file */
-                                MainFeedFragment.serialization(archiveMap);
+                                ArchiveHelper.serialization(archiveMap, new File(storyLi.getArchiveFilename()));
                                 Toast.makeText(mContext,"Story Unsaved",Toast.LENGTH_LONG).show();
 
                             }
