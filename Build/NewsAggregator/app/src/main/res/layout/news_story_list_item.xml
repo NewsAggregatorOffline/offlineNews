@@ -81,11 +81,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/news_1200x800"
-                android:layout_above="@+id/textView13"
                 android:paddingRight="7sp"
                 android:layout_alignParentStart="true" />
             <!--<ImageView-->
-                <!--android:id="@+id/imageView5"-->
+            <!--android:layout_above="@+id/textView13"-->
+
+            <!--android:id="@+id/imageView5"-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:src="@android:drawable/ic_menu_gallery"-->
