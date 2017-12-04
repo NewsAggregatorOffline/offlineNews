@@ -53,6 +53,10 @@ public class MainActivity extends Activity {
 
     private boolean incognito;
 
+    public static int mainMaxVal;
+    public static int archiveMaxVal;
+
+
 
     private final String[] fragmentNames = {
             "Home", "Archived",
@@ -64,12 +68,20 @@ public class MainActivity extends Activity {
 
     MainFeedFragment mainFeedFragment ;
     ArchiveFeedFragment archiveFeedFragment;
-    MainFeedFragment settingsFragment ;
+    SettingsFragment settingsFragment ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        if(savedInstanceState != null) {
+            mainMaxVal = savedInstanceState.getInt("mainMaxVal");
+            archiveMaxVal = savedInstanceState.getInt("archiveMaxVal");
+        }else {
+            mainMaxVal = 0;
+            archiveMaxVal = 0;
+        }
 
 
         incognito = false;
@@ -130,7 +142,7 @@ public class MainActivity extends Activity {
 
          mainFeedFragment = MainFeedFragment.instantiate(getApplicationContext(), "news");
          archiveFeedFragment =   ArchiveFeedFragment.instantiate(getApplicationContext(), "archiveNews");
-         settingsFragment = MainFeedFragment.instantiate(getApplicationContext(), "settings");
+         settingsFragment = SettingsFragment.instantiate(getApplicationContext(), "settings");
 
     }
 
@@ -227,6 +239,16 @@ public class MainActivity extends Activity {
 
             return fragmentNames[position];
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        savedInstanceState.putInt("mainMaxVal",mainMaxVal);
+        savedInstanceState.putInt("archiveMaxVal",archiveMaxVal);
+
+        super.onSaveInstanceState(savedInstanceState);
+
     }
 
 
