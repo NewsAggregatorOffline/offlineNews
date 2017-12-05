@@ -126,7 +126,7 @@ public class MainFeedFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        Log.i(TAG, "check class : " + this.getClass().getSimpleName());
+//        Log.i(TAG, "check class : " + this.getClass().getSimpleName());
         StoryLi storyLi = (StoryLi) newsViewAdapter.getItem(position);
         Intent intent = new Intent(MainFeedFragment.this.getActivity(), DisplayActivity.class);
         intent.putExtra("fileName",storyLi.getArchiveFilename());

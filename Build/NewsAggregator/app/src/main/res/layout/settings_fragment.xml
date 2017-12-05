@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="108dp" />
+            android:layout_marginEnd="80dp" />
 
         <TextView
             android:id="@+id/textView10"

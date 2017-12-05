@@ -75,12 +75,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+//        Log.i("Saved", "check var : " + mainMaxVal+"  "+ archiveMaxVal);
+
+
         if(savedInstanceState != null) {
             mainMaxVal = savedInstanceState.getInt("mainMaxVal");
             archiveMaxVal = savedInstanceState.getInt("archiveMaxVal");
         }else {
             mainMaxVal = 0;
             archiveMaxVal = 0;
+            Log.i("Saved", "saved is null");
+
         }
 
 

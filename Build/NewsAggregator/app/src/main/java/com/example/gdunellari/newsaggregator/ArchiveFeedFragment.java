@@ -109,7 +109,8 @@ public class ArchiveFeedFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        Log.i(TAG, "check class : " + this.getClass().getSimpleName());
+//        Log.i(TAG, "check class : " + this.getClass().getSimpleName());
+        Log.i(TAG, "check var : " + MainActivity.mainMaxVal+"  "+ MainActivity.archiveMaxVal);
 
 
         StoryLi storyLi = (StoryLi) newsViewAdapter2.getItem(position);

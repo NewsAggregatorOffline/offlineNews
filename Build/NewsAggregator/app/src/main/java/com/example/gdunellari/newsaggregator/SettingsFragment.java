@@ -58,6 +58,7 @@ public class SettingsFragment extends Fragment {
         numberPicker.setEnabled(true);
         numberPicker.setWrapSelectorWheel(true);
 
+
         numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
@@ -103,6 +104,13 @@ public class SettingsFragment extends Fragment {
 
             }
         });
+
+        numberPicker.setValue(MainActivity.mainMaxVal);
+        numberPicker2.setValue(MainActivity.archiveMaxVal);
+        Log.i("Sett", "check var : " + MainActivity.mainMaxVal+"  "+ MainActivity.archiveMaxVal);
+        Log.i("Sett", "check var 2 : " + numberPicker.getValue()+"  "+ numberPicker2.getValue());
+
+
 
 
 //        return super.onCreateView(inflater, container, savedInstanceState);
