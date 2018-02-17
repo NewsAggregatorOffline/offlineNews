@@ -6,7 +6,7 @@ Downloads stories from major news sites and allows offline reading mode
 Video demo of basic features: 
  https://vimeo.com/245858105
  
-Planned Future features:
+Planned future features:
 
 - More control and selection over news sources for the reader
 - Use of machine learning to better determine user preferences
