@@ -3,6 +3,9 @@ Offline News Aggregator
 
 Downloads stories from major news sites and allows offline reading mode
 
+Video demo of basic features: 
+ https://vimeo.com/245858105
+ 
 Planned Future features:
 
 - More control and selection over news sources for the reader
