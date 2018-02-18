@@ -43,7 +43,7 @@ public class StoryLi  implements Serializable{
     private byte[] urlImage;
     private String urlArticle;
     private String title;
-    private String description;
+    private String description = "";
     private String archiveFilename;
     private String data;
     private boolean saved = false;

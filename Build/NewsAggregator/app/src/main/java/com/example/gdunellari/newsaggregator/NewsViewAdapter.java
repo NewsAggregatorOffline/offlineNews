@@ -86,7 +86,7 @@ class NewsViewAdapter extends BaseAdapter {
         }
         if(bitmap != null) {storedViewHolder.image.setImageBitmap(bitmap);}
         storedViewHolder.text1.setText(storyLi.getTitle());
-        if(storyLi.getDescription() != null) {
+        if(storyLi.getDescription() != null && !storyLi.getDescription().equals("null")) {
             storedViewHolder.text2.setText(storyLi.getDescription());
         }else{
             storedViewHolder.text2.setText("");
