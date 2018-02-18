@@ -36,7 +36,8 @@ import java.util.concurrent.ExecutionException;
 
 public class ArchiveFeedFragment extends ListFragment {
     private static final String TAG = "ARCHIVE_FEED_FRAGMENT";
-    private static final String API_ENDPOINT = "https://newsapi.org/v2/everything?q=bitcoin&sortBy=popularity&apiKey=62a0b24bfa1f4484bfa9043021f4e8c8";
+//    private static final String API_ENDPOINT = "https://newsapi.org/v2/everything?q=bitcoin&sortBy=popularity&apiKey=62a0b24bfa1f4484bfa9043021f4e8c8";
+    private static final String API_ENDPOINT = "https://newsapi.org/v2/everything?sortBy=popularity&apiKey=62a0b24bfa1f4484bfa9043021f4e8c8";
     private static File archiveFile;
     private static JSONArray articles;
     private static Context mContext2;

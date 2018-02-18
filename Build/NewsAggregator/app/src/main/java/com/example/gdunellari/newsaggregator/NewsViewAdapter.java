@@ -84,9 +84,14 @@ class NewsViewAdapter extends BaseAdapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(bitmap != null) storedViewHolder.image.setImageBitmap(bitmap);
+        if(bitmap != null) {storedViewHolder.image.setImageBitmap(bitmap);}
         storedViewHolder.text1.setText(storyLi.getTitle());
-        storedViewHolder.text2.setText(storyLi.getDescription());
+        if(storyLi.getDescription() != null) {
+            storedViewHolder.text2.setText(storyLi.getDescription());
+        }else{
+            storedViewHolder.text2.setText("");
+
+        }
 
         storedViewHolder.switchView.setTag(position);
         storedViewHolder.switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
