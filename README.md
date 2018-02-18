@@ -3,6 +3,9 @@ Offline News Aggregator
 
 Downloads stories from major news sites and allows offline reading mode
 
+![alt text](https://github.com/NewsAggregatorOffline/offlineNews/blob/master/Build/ScreenShotNews.png)
+
+
 Video demo of basic features: 
  https://vimeo.com/245858105
  
